@@ -15,8 +15,8 @@
           <li><a href="/auth/login">Login</a></li>
           {{/unless}}
           {{#if currentUser}}
-          <li><a href="/users">User page</a></li>
-          <form action="/auth/logout" method="POST">
+          <li><a href="/matches">Matches</a></li>
+          <form class="form-nav" action="/auth/logout" method="POST">
             <button type="submit">Logout</button>
           </form>
           {{/if}}

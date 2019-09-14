@@ -3,13 +3,13 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-
+const flash = require('connect-flash')
 // Gestionar las sessiones de los usuarios con mongo
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 
 const indexRouter = require('./routes/index')
-const usersRouter = require('./routes/users')
+const matchesRouter = require('./routes/matches')
 const authRouter = require('./routes/auth')
 
 const app = express()
@@ -37,6 +37,8 @@ app.use(session({
   }
 }))
 
+app.use(flash())
+
 app.use((req, res, next) => {
   app.locals.currentUser = req.session.currentUser
   next()
@@ -53,7 +55,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
+app.use('/matches', matchesRouter)
 app.use('/auth', authRouter)
 
 // catch 404 and forward to error handler

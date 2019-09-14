@@ -31,6 +31,10 @@ header {
 
 nav ul {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+}:last-child {
+  margin-right: 0px;
 }
 nav ul li{
   flex-direction: row;
@@ -43,6 +47,16 @@ nav ul li{
 
 nav ul li a {
   font-size: 1.4rem;
+}
+
+.form-nav {
+  padding: 0px;
+}
+.form-nav button {
+  font-size: 1.4rem;
+  width: 100%;
+  outline: none;
+  border: none;
 }
 
 /* ---- typography ---- */

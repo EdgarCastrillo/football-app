@@ -1,15 +1,16 @@
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 const express = require('express')
+const { isLoggedIn, isNotLoggedIn, isFormFilled } = require('../middlewares/authMiddlewares')
 
 const User = require('../models/Users')
 const router = express.Router()
 
-router.get('/signup', (req, res, next) => {
+router.get('/signup', isLoggedIn, (req, res, next) => {
   res.render('signup', { title: 'Auth-app' })
 })
 
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', isLoggedIn, isFormFilled, async (req, res, next) => {
   const { username, password } = req.body
   try {
     const salt = bcrypt.genSaltSync(saltRounds)
@@ -30,11 +31,11 @@ router.post('/signup', async (req, res, next) => {
   }
 })
 
-router.get('/login', (req, res, next) => {
+router.get('/login', isLoggedIn, (req, res, next) => {
   res.render('login')
 })
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', isLoggedIn, isFormFilled, async (req, res, next) => {
   const { username, password } = req.body
   try {
     const user = await User.findOne({ username })
@@ -45,7 +46,7 @@ router.post('/login', async (req, res, next) => {
     if (bcrypt.compareSync(password, user.password)) {
       req.session.currentUser = user
       console.log(req.session.currentUser)
-      res.redirect('/')
+      res.redirect('/matches')
     } else {
       res.redirect('/auth/login')
     }
@@ -54,7 +55,7 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
-router.post('/logout', (req, res, next) => {
+router.post('/logout', isNotLoggedIn, (req, res, next) => {
   delete req.session.currentUser
   res.redirect('/auth/signup')
 })

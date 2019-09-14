@@ -10,3 +10,11 @@
     <button type="submit">Sign Up</button>
   </form>
 </section>
+
+{{#if messages.length}}
+  <ul class="validation">
+    {{#each messages}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
