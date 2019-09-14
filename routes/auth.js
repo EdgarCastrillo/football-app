@@ -1,9 +1,9 @@
-const express = require('express')
-const router = express.Router()
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+const express = require('express')
 
 const User = require('../models/Users')
+const router = express.Router()
 
 router.get('/signup', (req, res, next) => {
   res.render('signup', { title: 'Auth-app' })
@@ -36,7 +36,6 @@ router.get('/login', (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
   const { username, password } = req.body
-  console.log(req.body)
   try {
     const user = await User.findOne({ username })
     if (!user) {
@@ -53,6 +52,11 @@ router.post('/login', async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+})
+
+router.post('/logout', (req, res, next) => {
+  delete req.session.currentUser
+  res.redirect('/auth/signup')
 })
 
 module.exports = router

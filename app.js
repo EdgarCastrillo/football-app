@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+
 // Gestionar las sessiones de los usuarios con mongo
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
@@ -13,9 +14,7 @@ const authRouter = require('./routes/auth')
 
 const app = express()
 
-// npm install mongoose
 const mongoose = require('mongoose')
-// --
 mongoose.connect('mongodb://localhost/footballApp', {
   keepAlive: true,
   useNewUrlParser: true,
@@ -37,6 +36,11 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000
   }
 }))
+
+app.use((req, res, next) => {
+  app.locals.currentUser = req.session.currentUser
+  next()
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
