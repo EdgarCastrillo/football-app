@@ -9,7 +9,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 
 const indexRouter = require('./routes/index')
-const matchesRouter = require('./routes/matches')
+const teamsRouter = require('./routes/teams')
 const authRouter = require('./routes/auth')
 
 const app = express()
@@ -55,7 +55,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
-app.use('/matches', matchesRouter)
+app.use('/teams', teamsRouter)
 app.use('/auth', authRouter)
 
 // catch 404 and forward to error handler

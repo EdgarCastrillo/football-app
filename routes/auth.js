@@ -46,7 +46,7 @@ router.post('/login', isLoggedIn, isFormFilled, async (req, res, next) => {
     if (bcrypt.compareSync(password, user.password)) {
       req.session.currentUser = user
       console.log(req.session.currentUser)
-      res.redirect('/matches')
+      res.redirect('/teams')
     } else {
       res.redirect('/auth/login')
     }
