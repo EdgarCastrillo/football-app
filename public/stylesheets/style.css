@@ -1,8 +1,137 @@
+/* ---- reset ---- */
+
+html {
+  box-sizing: border-box;
+  background-color: #eee;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 1400px; 
+	margin: 0 auto !important;
+}
+
+main {
+  height: 100vh;
+  padding: 40px;
+  background-color: white;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background-color: #d6fff1;
+}
+
+nav ul {
+  display: flex;
+}
+nav ul li{
+  flex-direction: row;
+  list-style-type: none;
+  margin-right: 30px;
+  text-decoration: none;
+} :last-child {
+  margin-right: 0px;
+}
+
+nav ul li a {
+  font-size: 1.4rem;
+}
+
+/* ---- typography ---- */
+
+body {
+  color: #111;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 147%;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {  
+  font-size: 2rem;
+}
+
+h3 {}
+
+p {
+  margin: 0;
+  font-size: 1.4rem;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+  color: black;
+  font-size: 1.4rem;
 }
+
+
+
+/* ---- layout ---- */
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 728px;
+    margin: 0 auto;
+  }
+}
+
+
+/* ---- ---- */
+
+.form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+form {
+  width: 40%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+input {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #d6fff1;
+  font-size: 1rem;
+  border-radius: 30px;
+  padding-left: 20px;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+button {
+  width: 40%;
+  height: 40px;
+  background-color: #d6fff1;
+  border-radius: 30px;
+  border: 0;
+  font-size: 1rem;
+}
+
